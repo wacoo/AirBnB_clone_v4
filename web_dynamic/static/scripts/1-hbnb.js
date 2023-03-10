@@ -1,13 +1,11 @@
-let checked = [];
 $('document').ready(function () {
-  $('.amenities .popover input[type=checkbox]').change(function (){
-    if (this.ckecked) {
-      checked.push($(this).attr('data-id'));
+  let amenities = {};
+  $('INPUT[type="checkbox"]').change(function () {
+    if ($(this).is(':checked')) {
+      amenities[$(this).attr('data-id')] = $(this).attr('data-name');
     } else {
-      checked.pop($(this).attr('data-id'));
+      delete amenities[$(this).attr('data-id')];
     }
+    $('.amenities H4').text(Object.values(amenities).join(', '));
   });
-  for (let x = 0; x < checked.length; x++) {
-    $('.amenities h4').text().append(checked[x] + " ");
-  }
 });
